@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.26)
+
+# after all definitions, define project
+project(test CXX)
+
+# lib
+add_library(test SHARED src/test.cpp)
+target_include_directories(test PUBLIC include)
+set_target_properties(test PROPERTIES LINK_FLAGS_RELEASE "--for-linker --strip-debug-non-line --for-linker --gc-sections")
+
+# test main
+add_executable(app src/main.cpp)
+target_link_libraries(app test) 
